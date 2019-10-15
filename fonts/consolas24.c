@@ -1,9 +1,10 @@
+#include "consolas24.h"
 /* 
 **  Font data for Consolas 24pt
 */
 
 /* Character bitmaps for Consolas 24pt */
-const uint_8 consolas_24ptBitmaps[] = 
+const uint8_t consolas_24ptBitmaps[] = 
 {
 	/* @0 ' ' (18 pixels wide) */
 	//                   

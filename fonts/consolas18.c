@@ -1,9 +1,10 @@
+#include "consolas18.h"
 /* 
 **  Font data for Consolas 18pt
 */
 
 /* Character bitmaps for Consolas 18pt */
-const uint_8 consolas_18ptBitmaps[] = 
+const uint8_t consolas_18ptBitmaps[] = 
 {
 	/* @0 ' ' (15 pixels wide) */
 	//                

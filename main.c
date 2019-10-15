@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2019
  * 
  */
-#include "BMP280.h"
+#include "Sensor/BMP280.h"
 #include "Driver_I2C.h" // ::CMSIS Driver:I2C
 
 

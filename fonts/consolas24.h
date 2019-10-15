@@ -1,4 +1,3 @@
-
 #ifndef CONSOLAS_24_FONT
 #define CONSOLAS_24_FONT
 
@@ -8,4 +7,3 @@
 extern const uint8_t consolas_24ptBitmaps[];
 extern const FONT_CHAR_INFO consolas_24ptDescriptors[];
 #endif
-

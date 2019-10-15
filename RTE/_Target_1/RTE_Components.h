@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'test2' 
+ * Project: 'TempSensor' 
  * Target:  'Target 1' 
  */
 
