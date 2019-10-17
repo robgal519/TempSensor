@@ -16,8 +16,7 @@ static void i2c_event_callback(uint32_t event) {
 }
 
 static int8_t i2c_wait_for_transfer(void) {
-  while ((i2c_event & ARM_I2C_EVENT_TRANSFER_DONE) == 0U)
-    ;
+  while ((i2c_event & ARM_I2C_EVENT_TRANSFER_DONE) == 0U);
   /* Check if all data transferred */
   if ((i2c_event & ARM_I2C_EVENT_TRANSFER_INCOMPLETE) != 0U) {
     LOG("Transfer failed");
@@ -43,11 +42,9 @@ int32_t i2c_master_transmit(uint32_t addr,
 		addr,
 		data,
 		num, 
-		false);
+		xfer_pending);
 
-  if(!statusCode) {
 		i2c_wait_for_transfer();
-	}
 	
 	return statusCode;
 }

@@ -84,6 +84,14 @@ void oled_unlock_display(OLED *oled) {
 }
 
 void oled_send_framebuffer(OLED *oled) {
+	oled_send_command(0x21);
+	oled_send_command(0);
+	oled_send_command(127);
+
+	oled_send_command(0x22);
+	oled_send_command(0);
+	oled_send_command(7);
+
 	i2c_master_transmit(
 	  OLED_I2C_DEVICE_ADDRESS,
 	  (uint8_t *) oled,
