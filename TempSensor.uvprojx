@@ -432,6 +432,11 @@
               <FileType>5</FileType>
               <FilePath>.\OLED\OLED.h</FilePath>
             </File>
+            <File>
+              <FileName>Framebuffer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\OLED\Framebuffer.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -456,6 +461,26 @@
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Utils\Log.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Drawer</GroupName>
+          <Files>
+            <File>
+              <FileName>Drawer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Drawer\Drawer.c</FilePath>
+            </File>
+            <File>
+              <FileName>Drawer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Drawer\Drawer.h</FilePath>
+            </File>
+            <File>
+              <FileName>Drawable.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Drawer\Drawable.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -3,13 +3,14 @@
 #include "stdlib.h"
 #include "string.h"
 
+
 const uint8_t OLED_I2C_DEVICE_ADDRESS = 0b0111100;
 
 static void oled_send_command(uint8_t command);
 
 typedef struct OLED {
 	uint8_t control_byte;
-	uint8_t framebuffer[COLUMNS*PAGES];
+	uint8_t framebuffer[OLED_COLUMNS*OLED_PAGES];
 } OLED;
 
 OLED *oled_create(void) {
@@ -71,8 +72,13 @@ void oled_display_off(OLED *oled) {
 	oled_send_command(0xAE);
 }
 
-uint8_t *oled_access_framebuffer(OLED *oled) {
-	return oled->framebuffer;
+Framebuffer oled_access_framebuffer(OLED *oled) {
+	Framebuffer fb = { 
+	.framebuffer = oled->framebuffer, 
+	.width = OLED_COLUMNS,
+	.height_pages = OLED_PAGES,
+	};
+	return fb;
 }
 
 void oled_lock_display(OLED *oled) {
@@ -95,13 +101,13 @@ void oled_send_framebuffer(OLED *oled) {
 	i2c_master_transmit(
 	  OLED_I2C_DEVICE_ADDRESS,
 	  (uint8_t *) oled,
-    COLUMNS*PAGES+1,
+    OLED_COLUMNS*OLED_PAGES+1,
 	  false
 	);
 }
 
 void oled_clear_framebuffer(OLED *oled) {
-	memset(oled->framebuffer, 0, COLUMNS*PAGES);
+	memset(oled->framebuffer, 0, OLED_COLUMNS*OLED_PAGES);
 }
 
 static void oled_send_command(uint8_t command){

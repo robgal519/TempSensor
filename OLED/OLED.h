@@ -1,10 +1,12 @@
 #ifndef OLED_H
 #define OLED_H
 
-#define COLUMNS 128
-#define PAGES 8
+#define OLED_COLUMNS 128
+#define OLED_PAGES 8
+#define OLED_PAGE_SIZE 8
 
 #include <stdint.h>
+#include "Framebuffer.h"
 
 typedef struct OLED OLED;
 
@@ -16,7 +18,7 @@ void oled_display_on(OLED *oled);
 
 void oled_display_off(OLED *oled);
 
-uint8_t *oled_access_framebuffer(OLED *oled);
+Framebuffer oled_access_framebuffer(OLED *oled);
 
 void oled_lock_display(OLED *oled);
 

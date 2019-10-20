@@ -12,7 +12,7 @@
 #include "I2C/I2C.h"
 #include "OLED/OLED.h"
 
-typedef uint8_t (*TwoDimArray)[COLUMNS];
+typedef uint8_t (*TwoDimArray)[OLED_COLUMNS];
 
 int main()
 {
@@ -21,9 +21,9 @@ int main()
 	OLED *oled = oled_create();
 	oled_send_framebuffer(oled);
 	
-	uint8_t *fb = oled_access_framebuffer(oled);
+	Framebuffer fb = oled_access_framebuffer(oled);
 	
-	TwoDimArray fb_as_array = (TwoDimArray)fb;
+	TwoDimArray fb_as_array = (TwoDimArray)(fb.framebuffer);
 	
 	for(int i=2; i<8-2; i++){
 		for(int j=30; j<128-30; j++){

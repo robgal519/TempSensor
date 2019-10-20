@@ -1,6 +1,8 @@
 #ifndef FONT_COMMON
-#define FONT_CONNON
+#define FONT_COMMON
+
 #include <stdint.h>
+
 typedef struct FONT_CHAR_INFO{
     uint8_t width;
     uint32_t offset;
