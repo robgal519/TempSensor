@@ -89,7 +89,7 @@
             <nStopA1X>0</nStopA1X>
             <nStopA2X>0</nStopA2X>
           </AfterMake>
-          <SelectedForBatchBuild>0</SelectedForBatchBuild>
+          <SelectedForBatchBuild>1</SelectedForBatchBuild>
           <SVCSIdString></SVCSIdString>
         </TargetCommonOption>
         <CommonProperty>
@@ -327,8 +327,8 @@
             <uC99>1</uC99>
             <uGnu>1</uGnu>
             <useXO>0</useXO>
-            <v6Lang>1</v6Lang>
-            <v6LangP>1</v6LangP>
+            <v6Lang>3</v6Lang>
+            <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
             <v6Lto>0</v6Lto>
@@ -461,6 +461,16 @@
               <FileName>Log.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Utils\Log.h</FilePath>
+            </File>
+            <File>
+              <FileName>USART_Log.h</FileName>
+              <FileType>9</FileType>
+              <FilePath>.\Utils\USART_Log.h</FilePath>
+            </File>
+            <File>
+              <FileName>USART_Log.c</FileName>
+              <FileType>9</FileType>
+              <FilePath>.\Utils\USART_Log.c</FilePath>
             </File>
           </Files>
         </Group>

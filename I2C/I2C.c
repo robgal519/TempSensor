@@ -1,5 +1,7 @@
 #include "I2C.h"
 #include "Driver_I2C.h"
+#include Utils/Log.h>
+
 
 extern ARM_DRIVER_I2C Driver_I2C1;
 
@@ -8,6 +10,7 @@ static uint32_t i2c_event;
 static void i2c_event_callback(uint32_t event);
 
 static int8_t i2c_wait_for_transfer(void);
+
 
 
 static void i2c_event_callback(uint32_t event) {
