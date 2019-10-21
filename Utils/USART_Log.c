@@ -3,7 +3,7 @@
 #include <stdarg.h>
 #include <Driver_USART.h>
 
-ARM_DRIVER_USART* Logger_connection;
+static ARM_DRIVER_USART* Logger_connection = NULL;
 static uint32_t UART_event;
 
 extern ARM_DRIVER_USART LOGGER_CONNECTION;
