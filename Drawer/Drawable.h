@@ -10,11 +10,11 @@
 // bits are ignored .
 
 typedef struct Drawable {
-	uint8_t *data;
+	const uint8_t *data;
 	uint8_t offset_x;
 	uint8_t offset_y;
 	uint8_t width;
-	uint8_t height;
+	uint8_t height_pages;
 } Drawable;
 
 #endif

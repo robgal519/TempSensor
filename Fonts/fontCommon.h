@@ -3,13 +3,17 @@
 
 #include <stdint.h>
 
-typedef struct FONT_CHAR_INFO{
+typedef struct FontCharInfo{
     uint8_t width;
     uint32_t offset;
-}FONT_CHAR_INFO;
+} FontCharInfo;
+
+typedef struct FontInfo {
+    uint8_t *bitmaps;
+    FontCharInfo *descriptors;
+} FontInfo;
 
 #define CharToLookup(x) ((uint8_t)(x-32))
-
 
 #endif
 

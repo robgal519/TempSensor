@@ -12,6 +12,9 @@
 #include "I2C/I2C.h"
 #include "OLED/OLED.h"
 #include "Drawer/Drawer.h"
+#include "Fonts/consolas11.h"
+#include "Fonts/consolas18.h"
+#include "Fonts/consolas24.h"
 
 typedef uint8_t (*TwoDimArray)[OLED_COLUMNS];
 
@@ -23,20 +26,14 @@ int main()
 	
 	Framebuffer fb = oled_access_framebuffer(oled);
 	
-	uint8_t data[] = {0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 
-					0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 
-					0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 0xAA, 0x55, 
-	 				};
+	TextDrawable text_drawable = {
+		.text = "Wit@m",
+		.font_info = consolas_24pt,
+		.offset_x = 20,
+		.offset_y = 10,
+	};
 	
-
-	Drawable drawable = { .data = data, .offset_x = 0, .offset_y = 0, .width = 8, .height = 18 };
-	drawer_draw_bitmap(fb, drawable);
-	drawable.offset_y += 21;
-	drawer_draw_bitmap(fb, drawable);
-	drawable.offset_x += 50;
-	drawer_draw_bitmap(fb, drawable);
-	drawable.offset_x -= 20;
-	drawer_draw_bitmap(fb, drawable);
+	drawer_draw_text(fb, text_drawable);
 	
 	oled_send_framebuffer(oled);
 	

@@ -482,6 +482,11 @@
               <FileType>5</FileType>
               <FilePath>.\Drawer\Drawable.h</FilePath>
             </File>
+            <File>
+              <FileName>TextDrawable.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Drawer\TextDrawable.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
