@@ -34,10 +34,11 @@ void i2c_init(void) {
 	Driver_I2C1.Control(ARM_I2C_BUS_CLEAR, 0);
 }
 
-int32_t i2c_master_transmit(uint32_t addr,
-                            const uint8_t *data,
-                            uint32_t num,
-                            bool xfer_pending) {
+int32_t i2c_master_transmit(
+		uint32_t addr,
+		const uint8_t *data,
+		uint32_t num,
+		bool xfer_pending) {
 	int32_t statusCode = Driver_I2C1.MasterTransmit(
 		addr,
 		data,
@@ -47,4 +48,21 @@ int32_t i2c_master_transmit(uint32_t addr,
 		i2c_wait_for_transfer();
 	
 	return statusCode;
+}
+														
+int32_t i2c_master_receive(
+		uint32_t addr,
+		uint8_t *data,
+		uint32_t num,
+		bool xfer_pending){
+
+	int32_t statusCode = Driver_I2C1.MasterReceive(
+		addr,
+		data,
+		num, 
+		xfer_pending);
+
+		i2c_wait_for_transfer();
+	
+	return statusCode;			
 }

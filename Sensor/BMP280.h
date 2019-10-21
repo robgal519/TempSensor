@@ -56,12 +56,8 @@ typedef struct BMP280_Config
 
 /**
  * @brief Initialize The BMP280 device
- * The Driver handle initialization and deinitialization of raw connection. 
- * 
- * @param connection Raw connection to I2C
- * 
 */
-void BMP280_initConnection(ARM_DRIVER_I2C *connection);
+void BMP280_initConnection(void);
 
 /**
  * @brief set new configuration ( wake from Sleep mode)

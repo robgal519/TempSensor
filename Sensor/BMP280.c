@@ -10,14 +10,7 @@
  */
 
 #include "BMP280.h"
-
-#ifndef LOG
-#define LOG(message)
-#endif
-
-static ARM_DRIVER_I2C *connection = NULL;
-
-static uint32_t I2C_Event;
+#include "../I2C/I2C.h"
 
 static int32_t t_fine = 0;
 static uint16_t dig_T1 = 0;
@@ -37,12 +30,6 @@ static int16_t dig_P9 = 0;
 static uint8_t addr = 0;
 
 static uint8_t measurements[6];
-
-static void I2C_SignalEvent(uint32_t event)
-{
-    /* Save received events */
-    I2C_Event |= event;
-}
 
 static float lastReadedTemp;
 static float lastReadedPressure;
@@ -104,46 +91,14 @@ static int32_t readPressure()
     return bmp280_compensate_P_int64(Value);
 }
 
-static bool WaitForTransfer()
-{
-    while ((I2C_Event & ARM_I2C_EVENT_TRANSFER_DONE) == 0U)
-        ;
-    /* Check if all data transferred */
-    if ((I2C_Event & ARM_I2C_EVENT_TRANSFER_INCOMPLETE) != 0U)
-    {
-        LOG("Transfer failed");
-        return false;
-    }
-    return true;
-}
-
 static void readSingleRegister(uint8_t cmd, uint8_t *value, uint8_t Bytes)
 {
-    if (!connection)
-    {
-        LOG("Connection not provided");
-        return;
-    }
-    I2C_Event = 0U;
-    connection->MasterTransmit(addr, &cmd, 1, true);
-    if (!WaitForTransfer())
-        return;
-    I2C_Event = 0U;
-
-    connection->MasterReceive(addr, value, Bytes, false);
-    if (!WaitForTransfer())
-        return;
-    I2C_Event = 0U;
+    i2c_master_transmit(addr, &cmd, 1, true);
+    i2c_master_receive(addr, value, Bytes, false);
 }
 
 static void readCalibrationParameters(void)
 {
-    if (!connection)
-    {
-        LOG("Connection not provided");
-        return;
-    }
-
     readSingleRegister(0x88, (uint8_t *)&dig_T1, sizeof(dig_T1));
     readSingleRegister(0x8A, (uint8_t *)&dig_T2, sizeof(dig_T2));
     readSingleRegister(0x8c, (uint8_t *)&dig_T3, sizeof(dig_T3));
@@ -159,51 +114,23 @@ static void readCalibrationParameters(void)
     readSingleRegister(0x9E, (uint8_t *)&dig_P9, sizeof(dig_P9));
 }
 
-void BMP280_initConnection(ARM_DRIVER_I2C *DataConnection)
+void BMP280_initConnection(void)
 {
-    connection = DataConnection;
-    connection->Initialize(I2C_SignalEvent);
-    connection->PowerControl(ARM_POWER_FULL);
-    connection->Control(ARM_I2C_BUS_SPEED, ARM_I2C_BUS_SPEED_FAST);
-    connection->Control(ARM_I2C_BUS_CLEAR, 0);
-
     BMP280_setAddres(BMP250_DefaultAddress);
     readCalibrationParameters();
 }
 
 void BMP280_updateConfiguration(BMP280_Config configuration)
 {
-    if (!connection)
-    {
-        LOG("Connection not provided");
-        return;
-    }
-
     uint8_t configCmd[2] = {0xF4, *((uint8_t *)&configuration)};
-    I2C_Event = 0U;
-    connection->MasterTransmit(addr, configCmd, 2, false);
-    if (!WaitForTransfer())
-        return;
-    I2C_Event = 0U;
+    i2c_master_transmit(addr, configCmd, 2, false);
 }
 
 void BMP280_readMeasurements(void)
 {
-    if (!connection)
-    {
-        LOG("Connection not provided");
-        return;
-    }
-    I2C_Event = 0U;
     uint8_t reg = 0xF7;
-    connection->MasterTransmit(addr, &reg, 1, false);
-    if (!WaitForTransfer())
-        return;
-    I2C_Event = 0U;
-    connection->MasterReceive(addr, measurements, 6, false);
-    if (!WaitForTransfer())
-        return;
-    I2C_Event = 0U;
+    i2c_master_transmit(addr, &reg, 1, false);
+    i2c_master_receive(addr, measurements, 6, false);
 
     // Take care of the order temp first than pressure
     lastReadedTemp = readTemp()/100.;
